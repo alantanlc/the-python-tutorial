@@ -113,3 +113,37 @@ The float type is described in [Numeric Types -- int, float, complex]().
 ### hash(_object_)
 Return the hash value of the object (if it has one). Hash values are integers. They are used to quickly compare dictionary keys during a dictionary lookup. Numberic values that compare equal have the same hash value (even if they are of different types, as is the case for 1 and 1.0).
 > Note: For objects with custom `[\_\_hash\_\_()]()` methods, note that `[hash]()` truncates the return value based on the bit width of the host machine. See `[\_\_hash\_\_()]()` for details
+
+### hex(_x_)
+Convert an integer number to a lowercase hexadecimal string prefixed with "0x". If x is not a Python int object, it has to define and [\_\_index\_\_()]() method that returns an integer. Some examples:
+```python
+>>> hex(255)
+'0xff'
+>>> hex(-42)
+'-0x2a'
+```
+If you want to convert an integer number to an uppercase or lower hexadecimal string with prefix or not, you can use either of the following ways:
+```python
+>>> '%#x' % 255, '%x' % 255, '%X' % 255
+('0xff', 'ff', 'FF')
+>>> format(255, '#x'), format(255, 'x'), format(255, 'X')
+('0xff', 'ff', 'FF')
+>>> f'{255:#x}', f'{255:x}', f'{255:X}'
+('0xff', 'ff', 'FF')
+```
+> Note: To obtain a hexadecimal string representation for a float, use the `float.hex()` method.
+
+### id(_object_)
+Return the "identity" of an object. This is an integer which is guaranteed to be unique and constant for this object during its lifetime. Two objects with non-overlapping lifetimes may have the same [id()]() value.
+
+__CPython__ implementation detail: This is the address of the objecet in memory.
+
+### input([_prompt_])
+If the prompt argument is present, it is written to standard output without a trailing newline. The function then reads a line from input, converts it to a string (stripping a trailing newline), and returns that. When EOF is read, [EOFError]() is raised. Example:
+```python
+>>> s = input('--> ')
+--> Monty Python's Flying Circus
+>>> s
+"Monty Python's Flying Circus"
+```
+If the [readline]() module was loaded, then [input()]() will use it to provide elaborate line editing and history features.
